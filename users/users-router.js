@@ -3,7 +3,7 @@ const router = require('express').Router();
 const Users = require('./users-model.js');
 const restricted = require('../auth/restricted-middleware.js');
 
-router.get('/', restricted, onlydepartment('gryffindor'), (req, res) => {
+router.get('/', restricted, onlydepartment(''), (req, res) => {
   Users.find()
     .then(users => {
       res.json(users);
@@ -16,7 +16,7 @@ function onlyDepartment(department) {
     if(req.user && req.user.department && req.user.department.toLowerCase() === department) {
       next();
     } else {
-      res.status(403).json({ spell: 'Expelliarmus'})    
+      res.status(403).json({ spell: 'You have no power here!'})    
     }
   }
 }
